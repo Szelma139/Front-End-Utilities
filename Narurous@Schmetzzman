@@ -1,0 +1,141 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+* {
+margin: 0;
+padding: 0;    /*
+reset dla przegladarki, poniewaz normalnie ustawia ona padding oraz margin (i ich wartosc moga byc rozne dla roznych przegladarek)
+*/
+box-sizing: border-box;
+
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 30px;  
+
+}
+
+.header {  /*  95% of viewport height */
+    height: 95vh;
+    background-image: linear-gradient(to right,
+    rgba(126, 235, 122, 0.652),
+    rgba(90, 103, 219, 0.7)),
+    url("../img/newhero.jpg") ; /* kierunek i jak przechodza kolory, opacity*/
+    background-size: cover;
+    /*  cover - resize background to fit entire container even if it has to stretch image or cut a little bit on the edges, skaluje do wiewportu 95% */
+    background-position: top; /* top - czyli gora obrazka zostaje i sie nie rusza, jest tak jaklby przyspawana do niego*/
+    clip-path: polygon(0% 0%, 100% 0%, 85% 90%, 0% 100%);
+    position:relative;
+
+}
+     
+.logo-box
+{
+position: absolute; /* od parenta ktory jest relative*/
+top: 40px;
+left: 40px;
+}
+
+.logo {
+
+    height: 35px;
+}
+
+.logo:hover {
+ 
+    animation: moveInRight 1s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.text-box {  /*  css powinien miec taka sama kolejnosc jak elementy w htmlu bo inaczej sie nadpisze  */
+   position: absolute;
+   top: 40%;
+   left: 50%; 
+   transform: translate(-50%, -50%); /* to sie nie tyczy parenta */
+}
+
+.heading-primary {
+
+    color: #fff;
+    text-transform: uppercase;
+    /*position: absolute;*/
+    /*top:40%;*/
+       /* left:33%; */
+     /* srodkuje wzgledem pozycji relatywnej czyli headera i przesuwam od gory 40% ale idac w dol, i od lewej do prawej 33% bo to jest 
+    jedna 3 ekranu czyli z pierwsze 1/3 ide do 2 czesc - 2/3 */
+    /* czyli 50% przesuwa o 50% widtha parenta */
+    backface-visibility: hidden; /* fixuje shaking animacji*/
+
+}
+
+/* element blokowy obiera cala szerokosc oraz daje line breaka po sobie */
+.heading-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 35px;
+    animation-name: moveInLeft;
+    animation-duration: 3s;
+    animation-delay: 3s;
+   /* animation-iteration-count */
+   animation-timing-function: ease; 
+
+}
+
+.heading-primary-sub {
+
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 15px;
+    animation: moveInRight 3s ease-out;
+}
+
+@keyframes moveInLeft {
+
+    0% {
+        opacity: 0;
+        transform: translateX(100px)
+    }
+
+    80% {
+        transform:translate(-20px)
+
+    }
+    100% {
+opacity: 1;
+transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+
+    0% {
+        opacity: 0;
+        transform: translateX(-100px)
+    }
+    20% {
+        transform: rotate(150deg);
+    }
+
+    80% {
+        color:blue;
+        transform:translate(20px)
+
+    }
+    100% {
+        transform:rotate(210deg);
+opacity: 1;
+transform: translate(0);
+    }
+}
