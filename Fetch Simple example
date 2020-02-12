@@ -21,6 +21,9 @@ setData=(result)=> {
         data: result})
 }
 
+
+
+
 componentDidMount()
 {
 fetch('http://api.openweathermap.org/data/2.5/weather?q=Mielec&appid=206341276d5213d28c59a62b634e1b42')
@@ -33,17 +36,26 @@ fetch('http://api.openweathermap.org/data/2.5/weather?q=Mielec&appid=206341276d5
 //.then(data=>this.setState({data}));
 //
 
+
+
     render() {
 
         return (
             <div>
                 {console.log(this.state.data)}
             <h1>{this.state.data.name}</h1>
-            <p>{JSON.stringify(this.state.data)}</p>
+            <p>{JSON.stringify(this.state.data.temp)}</p>
             <p>{this.state.data.id}</p>
             <p>{this.state.data.base}</p>
             <p>{this.state.data.visibility}</p>
-            <p>{console.log(this.state.main.temp)}</p>
+            <p>{this.state.coord}</p>
+            <p>{this.state.data.weather ? this.state.data.weather[0].main : null}</p>
+
+            <p>{this.state.data.main ? this.state.data.main.temp : null}</p>
+
+           
+  
+        
            
         
             
