@@ -1,0 +1,57 @@
+import React, { Component } from 'react'
+
+export default class Fetcher extends Component {
+constructor(props){
+    super(props);
+
+    this.state = {
+        data: {},
+        isFetching: false,
+        weather: "",
+        temp: "",
+        country: "",
+        name: ""
+
+    };
+}
+
+setData=(result)=> {
+    this.setState({
+
+        data: result})
+}
+
+componentDidMount()
+{
+fetch('http://api.openweathermap.org/data/2.5/weather?q=Mielec&appid=206341276d5213d28c59a62b634e1b42')
+.then(response => response.json())
+.then(result => this.setData(result))
+.catch(error => error);
+  
+}
+//.then(response => response.json())
+//.then(data=>this.setState({data}));
+//
+
+    render() {
+
+        return (
+            <div>
+                {console.log(this.state.data)}
+            <h1>{this.state.data.name}</h1>
+            <p>{JSON.stringify(this.state.data)}</p>
+            <p>{this.state.data.id}</p>
+            <p>{this.state.data.base}</p>
+            <p>{this.state.data.visibility}</p>
+            <p>{console.log(this.state.main.temp)}</p>
+           
+        
+            
+           
+
+
+        
+            </div>
+        )
+    }
+}
