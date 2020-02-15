@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import './Fetcher.css';
-import WeatherCard from './WeatherCard';
 
 export default class Fetcher extends Component {
 constructor(props){
@@ -12,7 +10,11 @@ constructor(props){
         weather: "",
         temp: "",
         country: "",
-        name: ""
+        name: "",
+        dataChanged: 0,
+        inputValue:"",
+        url:"",
+        miasto:""
 
     };
 }
@@ -26,56 +28,66 @@ setData=(result)=> {
 
 
 
-componentDidMount()
+
+
+async handleApiRequest(name)
 {
-fetch('http://api.openweathermap.org/data/2.5/weather?q=Mielec&appid=206341276d5213d28c59a62b634e1b42')
-.then(response => response.json())
-.then(result => this.setData(result))
-.catch(error => error);
+const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=206341276d5213d28c59a62b634e1b42`);
+console.log(response)
+const json =  await response.json();
+this.setState({
+    data:json,
+    dataChanged: true
+})
+
   
 }
 //.then(response => response.json())
 //.then(data=>this.setState({data}));
 //
 
-returnIcon=()=> {
-  const url = this.state.data.weather ? this.state.data.weather[0].icon: null;
-  let iconurl = "http://openweathermap.org/img/w/" + url + ".png";
-return iconurl;
+
+getMyUpdatedState=()=> {
+const {post} = this.state;
+const dupa = this.state.data!= null && this.state.dataChanged&& this.state.data.main!=null ? (
+<div style={{color:"aqua"}}>{
+    this.state.data.name}
+    {this.state.data.main.temp}
+    <h2>{this.state.data.weather ? this.state.data.weather[0].id: null}</h2></div>): (<div>Nothing to show here mate !</div>)
+    return dupa;
 }
 
-getCelsius=()=> {
-  const fahrenheit = this.state.data.main ? this.state.data.main.temp : null;
-  if(fahrenheit!=null){
-    return (fahrenheit-32)/1,8;
-  }
+handleDataChange=(e)=>{
+this.setState({
+    inputValue:e.target.value
+})
+
 }
 
-
+handleSubmit=(event)=> {
+    event.preventDefault();
+    console.log(this.state.inputValue)
+    this.handleApiRequest(this.state.inputValue)
+}
     render() {
+
+       
 
         return (
             <div>
-              <WeatherCard 
-              name={this.state.data.name}
-              id={this.state.data.id} 
-              temp={this.state.data.main ? this.state.data.main.temp : null}
-              imgPath={this.returnIcon()}
-              />
-                {console.log(this.state.data)}
-            <p>{this.getCelsius()}</p>
-            <p>{JSON.stringify(this.state.data.temp)}</p>
-            <p>{this.state.data.weather ? this.state.data.weather[0].icon: null}</p>
-       
-  
-        
+              
            
-        
-            
-           
+               <form onSubmit={this.handleSubmit}>
+  <label>
+    Name:
+    <input onChange={this.handleDataChange} type="text" name="name" />
+  </label>
+ <button >Szukaj</button>
+</form>
 
-
-        
+<div>
+{!this.state.dataChanged ? <p></p> :this.getMyUpdatedState() }
+    </div>
             </div>
         )
     }
