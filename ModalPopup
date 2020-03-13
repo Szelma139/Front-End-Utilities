@@ -1,0 +1,62 @@
+import {
+  ModalSelectList,
+} from 'react-native-modal-select-list';
+
+const App = () => {
+  let modalRef;
+  const openModal = () => modalRef.show();
+  const saveModalRef = ref => modalRef = ref;
+  const onSelectedOption = value => {
+    console.log(`You selected: ${value}`);
+  };
+  return (
+    <Fragment>
+      <SafeAreaView style={styles.container}>
+        <Button title="Open Modal" onPress={openModal} />
+      </SafeAreaView>
+      <ModalSelectList
+        ref={saveModalRef}
+        placeholder={"Text something..."}
+        closeButtonText={"Close"}
+        options={staticModalOptions}
+        onSelectedOption={onSelectedOption}
+        disableTextSearch={false}
+        provider={modalOptionsProvider}
+      />
+    </Fragment>
+  );
+};
+
+
+
+
+
+handl1Clik1=()=> {
+this.setState({lang1:chosen});
+
+MainPage handleClick1={this.handleclick1}
+
+
+--------------------
+Main Page
+------------
+
+this.handleClick1(this.state.ModalValue);
+
+------------
+}
+
+
+
+ options={staticModalOptions}  -- array
+        onSelectedOption={onSelectedOption} lub onSelectedOption={onSelectedOption}
+        
+      const onSelectedOption = value => {
+    console.log(`You selected: ${value}`);
+    this.setState({
+    state:value});
+  };
+        
+ 
+ 
+ 
