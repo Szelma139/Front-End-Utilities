@@ -19,7 +19,7 @@ const Camper=(props)=> {
 }
 
 Camper.propTypes = {
-  name: PropTypes.stringa
+  name: PropTypes.string.isRequired
 };
 Camper.defaultProps = {
   name: "CamperBot"
