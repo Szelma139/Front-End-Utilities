@@ -1,0 +1,26 @@
+class App extends React.Component{
+  state = {
+    windowWith: window.innerWidth
+  }
+
+  handleResize = (event) => {
+    this.setState({ windowWith: window.innerWidth })
+  }
+  
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  componentDidUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  render() {
+    return(
+      <React.Fragment>
+        <h1>Window Width</h1>
+        <h1>{this.state.windowWith}</h1>
+      </React.Fragment>
+    )
+  }
+}
